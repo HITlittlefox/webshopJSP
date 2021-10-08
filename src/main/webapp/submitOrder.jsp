@@ -20,6 +20,8 @@
 
     //获得userid
     int userid = Integer.parseInt(request.getParameter("userid"));
+    //获得nextOrderId
+    int nextOrderId = Integer.parseInt(request.getParameter("nextOrderId"));
     //时间
     Date orderTime = new Date();
     //地址
@@ -28,9 +30,12 @@
     String phone = request.getParameter("phone");
     //String orderContent = request.getParameter("order_content");
 
+
 //todo:下单后把shopping_cart中已加入购物车但是没有下单的(order_id=最新+1且flag=0)货物的flag=1
-
-
+    String sql = "update shopping_cart SET flag=1 WHERE order_id = " + nextOrderId + "";
+    System.out.println("submitOrder update flag sql:" + sql);
+    stmt.execute(sql);
+//添加数据给order_sheet
     PreparedStatement addOrder = connection.prepareStatement(
             "insert into order_sheet (user_id, order_time, address, order_content, phone) " +
                     "values (?,?, ?, ?, ?)",
@@ -67,6 +72,8 @@
                 <input type="hidden" name="userid" value=<%=userid%>/>
                 <input type="submit" value="继续购物"/>
             </form>
+            <input type="submit" value="返回登录界面" onclick="window.location.href='account/login.jsp'">
+
         </div>
 
         <%--//todo:订单详情：找出shopping_cart中已加入购物车且已下单的(order_id=最新+1-1 且flag=1)货物--%>

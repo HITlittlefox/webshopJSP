@@ -98,7 +98,7 @@
             System.out.println("yourflagis" + flagOrder);
 
         %>
-        <form method="post" action="submitOrder.jsp" accept-charset="UTF-8"
+        <form method="post" action="submitOrder.jsp?nextOrderId=<%=nextOrderId%>" accept-charset="UTF-8"
               charset="UTF-8">
             <input type="hidden" name="userid" value="<%=userid%>"/>
             <table style="border: 1px black solid">

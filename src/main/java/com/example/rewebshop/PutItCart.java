@@ -61,7 +61,6 @@ public class PutItCart extends HttpServlet {
         response.getWriter().write("<h3>" + userid + "</h3>");
 
         response.getWriter().write("<a href=\"showCart.jsp?userid=" + userid + "&nextOrderId=" + nextOrderId + "\">查看购物车</a>");
-        response.getWriter().write("<a href=\"submitOrder.jsp?userid=" + userid + "\">直接下单</a>");
     }
 
     public void destroy() {
