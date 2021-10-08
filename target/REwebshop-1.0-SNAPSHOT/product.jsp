@@ -59,12 +59,10 @@
         </div>
         <%--while (rs2.next()) {--%>
         <%--1. 需要先把”第一分类“的信息从category取出来--%>
-        <%while (rs.next()) {%>
-        <form method="post" action="PutItCart">
-
-            <table>
-                <tr>
-
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr))">
+            <%while (rs.next()) {%>
+            <div style="border: 1px solid black; margin: 5px; padding: 5px; height: 400px">
+                <form method="post" action="PutItCart">
                     <input type="hidden" name="orderid" value="<%=orderid%>"/>
                     <input type="hidden" name="userId" value="<%=userid%>"/>
                     <input type="hidden" name="productId" value="<%=rs.getString("product_id")%>"/>
@@ -94,14 +92,10 @@
                         <p style="margin-left: 50px">
                             <input style="background-color:red;margin-left: auto " type="submit" value="添加到购物车"/>
                         </p>
-                    </td>
-
-                </tr>
-            </table>
-
-
-        </form>
-        <%}%>
+                </form>
+            </div>
+            <%}%>
+        </div>
 
     </body>
 </html>

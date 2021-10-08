@@ -13,6 +13,7 @@
 <%
     String userid = request.getParameter("userid");
     String nextOrderId = request.getParameter("nextOrderId");
+    System.out.println("nextOrderIdofshowCart:" + nextOrderId);
     System.out.println("userid in showCart:" + userid);
 
 

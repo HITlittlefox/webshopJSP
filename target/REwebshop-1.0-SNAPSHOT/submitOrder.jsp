@@ -69,10 +69,11 @@
             <p>您的订单编号为 <%=orderId%>
             </p>
             <form method="get" action="category1.jsp">
-                <input type="hidden" name="userid" value=<%=userid%>/>
+                <input type="hidden" name="userid" value="<%=userid%>"/>
                 <input type="submit" value="继续购物"/>
             </form>
             <input type="submit" value="返回登录界面" onclick="window.location.href='account/login.jsp'">
+            <input type="submit" value="返回主界面" onclick="window.location.href='index.jsp'"/>
 
         </div>
 
