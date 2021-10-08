@@ -33,15 +33,20 @@ public class PutItCart extends HttpServlet {
         int singlePrice = Integer.parseInt(request.getParameter("singlePrice"));
         int userid = Integer.parseInt(request.getParameter("userId"));
 
+        int nextOrderId = 1 + Integer.parseInt(request.getParameter("orderid"));
+
+        System.out.println("useridofPutItCart:" + userid);
+
         request.setAttribute("id", productId);
         request.setAttribute("userid", userid);
 
         try (Connection conn = ConnectionUtil.getConnection()) {
-            try (PreparedStatement addToCart = conn.prepareStatement("insert into shopping_cart (product_id, amount, price, user_id) values (?, ?, ?, ?)")) {
+            try (PreparedStatement addToCart = conn.prepareStatement("insert into shopping_cart (product_id, amount, price, user_id, order_id) values (?, ?, ?, ?, ?)")) {
                 addToCart.setInt(1, productId);
                 addToCart.setInt(2, count);
                 addToCart.setInt(3, count * singlePrice);
                 addToCart.setInt(4, userid);
+                addToCart.setInt(5, nextOrderId);
                 addToCart.execute();
             }
         } catch (SQLException | ClassNotFoundException e) {
@@ -53,6 +58,10 @@ public class PutItCart extends HttpServlet {
         response.setContentType("text/html;charset=utf-8");
         response.setCharacterEncoding("UTF-8");
         response.getWriter().write("<h3>添加商品到购物车成功!</h3>");
+        response.getWriter().write("<h3>" + userid + "</h3>");
+
+        response.getWriter().write("<a href=\"showCart.jsp?userid=" + userid + "&nextOrderId=" + nextOrderId + "\">查看购物车</a>");
+        response.getWriter().write("<a href=\"submitOrder.jsp?userid=" + userid + "\">直接下单</a>");
     }
 
     public void destroy() {

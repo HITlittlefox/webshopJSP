@@ -12,6 +12,7 @@
 
 <%
     String userid = request.getParameter("userid");
+    String nextOrderId = request.getParameter("nextOrderId");
     System.out.println("userid in showCart:" + userid);
 
 
@@ -42,7 +43,7 @@
             <h3><a href="index.jsp">回到首页</a></h3>
             <h3><a href="category1.jsp?userid=<%=userid%>">返回产品分类页面</a></h3>
         </div>
-        <table style="border: 1px white solid">
+        <table style="border: 1px black solid">
             <tr>
                 <td>产品id</td>
                 <td>产品名称</td>
@@ -51,7 +52,13 @@
                 <td>总价</td>
             </tr>
             <%
-                String sql = "select * from shopping_cart where user_id=" + userid + " ";
+
+                //Eureka! 锦囊妙计：给放入购物车的货物设置一个flag，
+                //flag=0:“放入购物车但是没有购买”的产品
+                //当下单一次，就让购物车里的产品，flag=1。
+                //查看订单的时候，检索购物车表单中flag=0的货物
+                String sql = "select * from shopping_cart where user_id=" + userid + " " + "and flag=0 and order_id=" + nextOrderId + " ";
+                System.out.println("showCartSql：" + sql);
                 ResultSet rs = stmt.executeQuery(sql);
 
                 while (rs.next()) {
@@ -91,9 +98,10 @@
             System.out.println("yourflagis" + flagOrder);
 
         %>
-        <form method="post" action="submitOrder.jsp" accept-charset="UTF-8" charset="UTF-8">
-            <input type="hidden" name="user_id" value="<%=userid%>"/>
-            <table>
+        <form method="post" action="submitOrder.jsp" accept-charset="UTF-8"
+              charset="UTF-8">
+            <input type="hidden" name="userid" value="<%=userid%>"/>
+            <table style="border: 1px black solid">
                 <tr>
                     <td>地址</td>
                     <td><input class="button" type="text" name="address"></td>

@@ -25,6 +25,17 @@
     Statement stmt = conn.createStatement();
 %>
 <%
+    //拿出订单表中最大的订单号
+    String sqlForOrderId = "select order_id from order_sheet ORDER BY order_id DESC LIMIT 1";
+    System.out.println("拿出订单表中最大的订单号sql" + sqlForOrderId);
+    stmt.execute(sqlForOrderId);
+    ResultSet rsSqlForOrderId = stmt.executeQuery(sqlForOrderId);
+    String orderid = null;
+    while (rsSqlForOrderId.next()) {
+        orderid = rsSqlForOrderId.getString("order_id");
+    }
+%>
+<%
     //拿出第三分类(共3分类)
     String sql = "select * from products where category_id  = '" + category + "'";
     System.out.println(sql);
@@ -32,23 +43,26 @@
     ResultSet rs = stmt.executeQuery(sql);
 
 %>
+
+
 <!DOCTYPE html>
 <html>
     <head>
         <title>商城|产品</title>
     </head>
     <body>
-
         <div>
             <h3>这里是产品页面！</h3>
         </div>
         <%--while (rs2.next()) {--%>
         <%--1. 需要先把”第一分类“的信息从category取出来--%>
+        <%while (rs.next()) {%>
         <form method="post" action="PutItCart">
 
             <table>
                 <tr>
-                    <%while (rs.next()) {%>
+
+                    <input type="hidden" name="orderid" value="<%=orderid%>"/>
                     <input type="hidden" name="userId" value="<%=userid%>"/>
                     <input type="hidden" name="productId" value="<%=rs.getString("product_id")%>"/>
                     <input type="hidden" name="singlePrice" value="<%=rs.getString("price")%>"/>
@@ -78,9 +92,15 @@
                             <input style="background-color:red;margin-left: auto " type="submit" value="添加到购物车"/>
                         </p>
                     </td>
-                    <%}%>
+
                 </tr>
             </table>
+
+
         </form>
+        <%}%>
+        <p>
+            <a href="showCart.jsp?userid=<%=userid%>">查看购物车</a>
+        </p>
     </body>
 </html>
