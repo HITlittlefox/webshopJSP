@@ -5,25 +5,20 @@
 <html>
     <head>
         <title>商城|登录</title>
+        <link rel="stylesheet" href="../css/login.css">
+
     </head>
     <body>
-        <div>
+        <div id="loginDiv">
             <form method="post" action="login-check.jsp">
                 <h1>登陆</h1>
-                <table>
-                    <tr>
-                        <td>用户:</td>
-                        <td><input type="text" name="user"></td>
-                    </tr>
-                    <tr>
-                        <td>密码:</td>
-                        <td><input type="password" name="psd"></td>
-                    </tr>
-                </table>
-                <div>
-                    <input type="submit" value="登陆">
+                <p>用户姓名:<input type="text" name="user"><label id="user_trip"></label></p>
+                <p>用户密码:<input type="password" name="psd"><label id="psd_trip"></label></p>
+
+                <div id="select">
+                    <input type="submit" class="button" value="登陆">
                     <%--保持注册与登录按钮样式相同，并点击注册后跳转页面--%>
-                    <input type="button" value="注册" onclick="window.location.href='register.jsp'">
+                    <input type="button" class="button" value="注册" onclick="window.location.href='register.jsp'">
 
                 </div>
                 <div>

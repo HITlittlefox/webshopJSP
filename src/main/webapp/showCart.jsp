@@ -32,87 +32,94 @@
 <html>
     <head>
         <title>您的购物车页面！</title>
+        <link rel="stylesheet" href="css/category1.css">
+
     </head>
     <body>
-        <div>
-            <h1>
-                这里是
-                <em>
-                    <%=user_name%>
-                </em>
-                的购物车页面！</h1>
-            <h3><a href="index.jsp">回到首页</a></h3>
-            <h3><a href="category1.jsp?userid=<%=userid%>">返回产品分类页面</a></h3>
-        </div>
-        <table style="border: 1px black solid">
-            <tr>
-                <td>产品id</td>
-                <td>产品名称</td>
-                <td>单价</td>
-                <td>购买数量</td>
-                <td>总价</td>
-            </tr>
-            <%
+        <div align="center">
 
-                //Eureka! 锦囊妙计：给放入购物车的货物设置一个flag，
-                //flag=0:“放入购物车但是没有购买”的产品
-                //当下单一次，就让购物车里的产品，flag=1。
-                //查看订单的时候，检索购物车表单中flag=0的货物
-                String sql = "select * from shopping_cart where user_id=" + userid + " " + "and flag=0 and order_id=" + nextOrderId + " ";
-                System.out.println("showCartSql：" + sql);
-                ResultSet rs = stmt.executeQuery(sql);
+            <div>
+                <h1>
+                    这里是
+                    <em>
+                        <%=user_name%>
+                    </em>
+                    的购物车页面！</h1>
+                <h3><a href="index.jsp">回到首页</a></h3>
+                <h3><a href="category1.jsp?userid=<%=userid%>">返回产品分类页面</a></h3>
+            </div>
+            <table style="border: 5px wheat solid">
+                <tr>
+                    <td>产品id</td>
+                    <td>产品名称</td>
+                    <td>单价</td>
+                    <td>购买数量</td>
+                    <td>总价</td>
+                </tr>
+                <%
 
-                while (rs.next()) {
-                    int productId = rs.getInt("product_id");
-                    int userId = rs.getInt("user_id");
-                    int amount = rs.getInt("amount");
-                    int totalPrice = rs.getInt("price");
-                    try (PreparedStatement getProduct = conn.prepareStatement("select name, price from products where product_id = ?")) {
-                        getProduct.setInt(1, productId);
-                        try (ResultSet product = getProduct.executeQuery()) {
-                            if (product.next()) {
-                                String productName = product.getString("name");
-                                int singlePrice = product.getInt("price");
-            %>
-            <tr>
-                <td><%=productId%>
-                </td>
-                <td><%=productName%>
-                </td>
-                <td><%=singlePrice%>
-                </td>
-                <td><%=amount%>
-                </td>
-                <td><%=totalPrice%>
-                </td>
-            </tr>
-            <%
+                    //Eureka! 锦囊妙计：给放入购物车的货物设置一个flag，
+                    //flag=0:“放入购物车但是没有购买”的产品
+                    //当下单一次，就让购物车里的产品，flag=1。
+                    //查看订单的时候，检索购物车表单中flag=0的货物
+                    String sql = "select * from shopping_cart where user_id=" + userid + " " + "and flag=0 and order_id=" + nextOrderId + " ";
+                    System.out.println("showCartSql：" + sql);
+                    ResultSet rs = stmt.executeQuery(sql);
+
+                    while (rs.next()) {
+                        int productId = rs.getInt("product_id");
+                        int userId = rs.getInt("user_id");
+                        int amount = rs.getInt("amount");
+                        int totalPrice = rs.getInt("price");
+                        try (PreparedStatement getProduct = conn.prepareStatement("select name, price from products where product_id = ?")) {
+                            getProduct.setInt(1, productId);
+                            try (ResultSet product = getProduct.executeQuery()) {
+                                if (product.next()) {
+                                    String productName = product.getString("name");
+                                    int singlePrice = product.getInt("price");
+                %>
+                <tr>
+                    <td><%=productId%>
+                    </td>
+                    <td><%=productName%>
+                    </td>
+                    <td><%=singlePrice%>
+                    </td>
+                    <td><%=amount%>
+                    </td>
+                    <td><%=totalPrice%>
+                    </td>
+                </tr>
+                <%
+                                }
                             }
                         }
                     }
-                }
-            %>
-        </table>
-
-        <%
-            String flagOrder = request.getParameter("flagOrder");
-            System.out.println("yourflagis" + flagOrder);
-
-        %>
-        <form method="post" action="submitOrder.jsp?nextOrderId=<%=nextOrderId%>" accept-charset="UTF-8"
-              charset="UTF-8">
-            <input type="hidden" name="userid" value="<%=userid%>"/>
-            <table style="border: 1px black solid">
-                <tr>
-                    <td>地址</td>
-                    <td><input class="button" type="text" name="address"></td>
-                </tr>
-                <tr>
-                    <td>电话号码</td>
-                    <td><input class="button" type="text" name="phone"></td>
-                </tr>
+                %>
             </table>
-            <input type="submit" value="提交">
-        </form>
+
+            <%
+                String flagOrder = request.getParameter("flagOrder");
+                System.out.println("yourflagis" + flagOrder);
+
+            %>
+            <form style="margin-top: 30px" method="post" action="submitOrder.jsp?nextOrderId=<%=nextOrderId%>"
+                  accept-charset="UTF-8"
+                  charset="UTF-8">
+                <input type="hidden" name="userid" value="<%=userid%>"/>
+                <table>
+                    <tr>
+                        <td>收货地址：</td>
+                        <td><input class="button" type="text" name="address"></td>
+                    </tr>
+                    <tr>
+                        <td>电话号码：</td>
+                        <td><input class="button" type="text" name="phone"></td>
+                    </tr>
+                </table>
+                <input type="submit" value="提交">
+            </form>
+        </div>
     </body>
+
 </html>

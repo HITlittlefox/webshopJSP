@@ -10,32 +10,30 @@
 <html>
     <head>
         <title>商城|注册</title>
+        <link rel="stylesheet" href="../css/register.css">
+
     </head>
     <body>
-        <div>
+        <div id="loginDiv">
             <form method="post" action="register-check.jsp">
                 <h1>注册</h1>
-                <table>
-                    <tr>
-                        <td>用户姓名:</td>
-                        <td><input placeholder="请输入账号" type="text" name="user" autofocus required></td>
+                <p>用户姓名:<input placeholder="请输入账号" type="text" name="user" autofocus required>
 
-                    </tr>
+                </p>
+                <p>用户密码:<input placeholder="请输入密码" id="psd" type="password" name="psd" required>
+                </p>
+                <p>确认密码:<input placeholder="请再次输入密码" id="psd-check" type="password" name="psd-check" required>
+                </p>
 
-                    <tr>
-                        <td>用户密码:</td>
-                        <td><input placeholder="请输入密码" id="psd" type="password" name="psd" required></td>
-                    </tr>
 
-                    <tr>
-                        <td>确认密码:</td>
-                        <td><input placeholder="请再次输入密码" id="psd-check" type="password" name="psd-check" required></td>
-                    </tr>
-                </table>
-                <p>
+                <p style="text-align: center;">
                     <input type="submit" class="button" value="注册" onclick="checkPassword()">
                 </p>
+
+                <h1><a href="login.jsp">返回登陆页面</a></h1>
+
             </form>
+
         </div>
 
     </body>

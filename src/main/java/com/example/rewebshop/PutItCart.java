@@ -57,10 +57,15 @@ public class PutItCart extends HttpServlet {
 
         response.setContentType("text/html;charset=utf-8");
         response.setCharacterEncoding("UTF-8");
+        response.getWriter().write("<link rel=\"stylesheet\" href=\"css/category1.css\">");
+        response.getWriter().write("<div align=\"center\">");
+
         response.getWriter().write("<h3>添加商品到购物车成功!</h3>");
         response.getWriter().write("<h3>" + userid + "</h3>");
 
         response.getWriter().write("<a href=\"showCart.jsp?userid=" + userid + "&nextOrderId=" + nextOrderId + "\">查看购物车</a>");
+        response.getWriter().write("<div>");
+
     }
 
     public void destroy() {

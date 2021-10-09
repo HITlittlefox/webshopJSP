@@ -42,13 +42,22 @@
 <html>
     <head>
         <title>注册检查页面</title>
+        <link rel="stylesheet" href="../css/register.css">
+
     </head>
     <body>
         <%
             if (rs.next()) {
         %>
-        <h1>注册成功，请登录</h1>
-        <a href="login.jsp">返回登陆</a>
+
+        <div>
+            <h1>注册成功，请登录</h1>
+        </div>
+        <br>
+        <p></p>
+        <div>
+            <h1><a href="login.jsp">返回登陆</a></h1>
+        </div>
         <%
         } else {
         %>

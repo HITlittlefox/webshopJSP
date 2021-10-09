@@ -1,0 +1,26 @@
+div.pos_abs {
+    position: absolute;
+    left: 300px;
+    top: 20px
+}
+
+html, div, body {
+    color: white;
+    background-color: #56536A;
+
+}
+
+#productname {
+    margin-left: 20px;
+    flex: auto
+}
+
+p, a {
+    color: azure;
+}
+
+div.pos_abs2 {
+    position: absolute;
+    right: 300px;
+    top: 20px
+}

@@ -34,30 +34,33 @@
 <html>
     <head>
         <title>商城|一级分类</title>
+        <link rel="stylesheet" href="css/category1.css">
+
     </head>
     <body>
-
-        <div>
-            <h3>这里是商品一级分类页面！</h3>
+        <div align="center">
+            <div>
+                <h3>这里是商品一级分类页面！</h3>
+            </div>
+            <%--while (rs2.next()) {--%>
+            <%--1. 需要先把”一级分类“的信息从category取出来--%>
+            <table>
+                <tr>
+                    <%while (rs.next()) {%>
+                    <td>
+                        <a id="productname"
+                           href="category2.jsp?categoryid=<%=rs.getString("category_id")%>&userid=<%=userid%>">
+                            分类名称：<%=rs.getString("name")%><br>
+                            <img style="border-radius:10px;"
+                                 src="<%=rs.getString("src")%>"
+                                 alt="这里是图片"
+                                 height="150"
+                                 width="200">
+                        </a>
+                    </td>
+                    <%}%>
+                </tr>
+            </table>
         </div>
-        <%--while (rs2.next()) {--%>
-        <%--1. 需要先把”一级分类“的信息从category取出来--%>
-        <table>
-            <tr>
-                <%while (rs.next()) {%>
-                <td>
-                    <a href="category2.jsp?categoryid=<%=rs.getString("category_id")%>&userid=<%=userid%>">
-                        分类名称：<%=rs.getString("name")%><br>
-                        <img style="border-radius:10px;"
-                             src="<%=rs.getString("src")%>"
-                             alt="这里是图片"
-                             height="150"
-                             width="200">
-                    </a>
-                </td>
-                <%}%>
-            </tr>
-        </table>
-
     </body>
 </html>

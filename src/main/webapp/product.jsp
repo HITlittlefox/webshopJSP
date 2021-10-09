@@ -49,53 +49,57 @@
 <html>
     <head>
         <title>商城|产品</title>
+        <link rel="stylesheet" href="css/category1.css">
+
     </head>
     <body>
-        <div>
-            <h3>这里是产品页面！</h3>
-            <h3>
-                <a href="showCart.jsp?userid=<%=userid%>">查看购物车</a>
-            </h3>
-        </div>
-        <%--while (rs2.next()) {--%>
-        <%--1. 需要先把”第一分类“的信息从category取出来--%>
-        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr))">
-            <%while (rs.next()) {%>
-            <div style="border: 1px solid black; margin: 5px; padding: 5px; height: 400px">
-                <form method="post" action="PutItCart">
-                    <input type="hidden" name="orderid" value="<%=orderid%>"/>
-                    <input type="hidden" name="userId" value="<%=userid%>"/>
-                    <input type="hidden" name="productId" value="<%=rs.getString("product_id")%>"/>
-                    <input type="hidden" name="singlePrice" value="<%=rs.getString("price")%>"/>
-                    <td>
+        <div align="center">
 
-                        <p>
-                            商品名称：<%=rs.getString("name")%>
-                        </p>
-                        <p>
-                            商品描述：<%=rs.getString("des")%>
-                        </p>
-                        <p>
-                            商品价格：<%=rs.getString("price")%>
-                        </p>
-                        <p>
-                            购买数量：<input min="1" step="1" type="number" name="count" value=1
-                                        style="width:50px;color: black"/>
-                        </p>
-                        <p>
-                            <img style="border-radius:10px;"
-                                 src="<%=rs.getString("src")%>"
-                                 alt="这里是图片"
-                                 height="150"
-                                 width="200">
-                        </p>
-                        <p style="margin-left: 50px">
-                            <input style="background-color:red;margin-left: auto " type="submit" value="添加到购物车"/>
-                        </p>
-                </form>
+            <div>
+                <h3>这里是产品页面！</h3>
+                <h3>
+                    <a href="showCart.jsp?userid=<%=userid%>">查看购物车</a>
+                </h3>
             </div>
-            <%}%>
-        </div>
+            <%--while (rs2.next()) {--%>
+            <%--1. 需要先把”第一分类“的信息从category取出来--%>
+            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr))">
+                <%while (rs.next()) {%>
+                <div style="border: 1px solid black; margin: 5px; padding: 5px; height: 400px">
+                    <form method="post" action="PutItCart">
+                        <input type="hidden" name="orderid" value="<%=orderid%>"/>
+                        <input type="hidden" name="userId" value="<%=userid%>"/>
+                        <input type="hidden" name="productId" value="<%=rs.getString("product_id")%>"/>
+                        <input type="hidden" name="singlePrice" value="<%=rs.getString("price")%>"/>
+                        <td>
 
+                            <p>
+                                商品名称：<%=rs.getString("name")%>
+                            </p>
+                            <p>
+                                商品描述：<%=rs.getString("des")%>
+                            </p>
+                            <p>
+                                商品价格：<%=rs.getString("price")%>
+                            </p>
+                            <p>
+                                购买数量：<input min="1" step="1" type="number" name="count" value=1
+                                            style="width:50px;color: black"/>
+                            </p>
+                            <p>
+                                <img style="border-radius:10px;"
+                                     src="<%=rs.getString("src")%>"
+                                     alt="这里是图片"
+                                     height="150"
+                                     width="200">
+                            </p>
+                            <p style="margin-left: 50px">
+                                <input style="background-color:red;margin-left: auto " type="submit" value="添加到购物车"/>
+                            </p>
+                    </form>
+                </div>
+                <%}%>
+            </div>
+        </div>
     </body>
 </html>

@@ -61,6 +61,8 @@
 <html>
     <head>
         <title>提交订单</title>
+        <link rel="stylesheet" href="css/category1.css">
+
     </head>
     <body>
         <div align="center">
@@ -78,6 +80,43 @@
         </div>
 
         <%--//todo:订单详情：找出shopping_cart中已加入购物车且已下单的(order_id=最新+1-1 且flag=1)货物--%>
+        <%
+            String sqlGoodsYouBought = "select * from shopping_cart,products where shopping_cart.product_id=products.product_id AND shopping_cart.user_id=" + userid + " " + "and flag=1 and shopping_cart.order_id=" + nextOrderId + "";
+
+            System.out.println(sqlGoodsYouBought);
+            stmt.execute(sqlGoodsYouBought);
+            ResultSet rs2 = stmt.executeQuery(sqlGoodsYouBought);%>
+
+        <table align="center" style="margin-top:50px ;border: 5px wheat solid">
+            <tr>
+                <td>产品id</td>
+                <td>产品名称</td>
+                <td>单价</td>
+                <td>购买数量</td>
+                <td>总价</td>
+            </tr>
+            <% while (rs2.next()) {%>
+            <tr>
+                <td><%=rs2.getString("shopping_cart.product_id") %>
+                </td>
+                <td>
+                    <%--不知道怎么办显示产品的名称--%>
+                    <%--使用联结！！！--%>
+                    <%=rs2.getString("products.name") %>
+                </td>
+                <td>
+                    <%=rs2.getString("products.price") %>
+                </td>
+                <td><%=rs2.getString("shopping_cart.amount") %>
+                </td>
+                <td><%=rs2.getString("shopping_cart.price") %>
+                </td>
+            </tr>
+            <%
+                }
+
+            %>
+        </table>
 
 
     </body>
