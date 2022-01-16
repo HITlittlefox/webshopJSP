@@ -57,9 +57,7 @@
 
             <div>
                 <h3>这里是产品页面！</h3>
-                <h3>
-                    <a href="showCart.jsp?userid=<%=userid%>">查看购物车</a>
-                </h3>
+
             </div>
             <%--while (rs2.next()) {--%>
             <%--1. 需要先把”第一分类“的信息从category取出来--%>

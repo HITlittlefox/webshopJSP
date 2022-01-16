@@ -46,7 +46,7 @@
                     </em>
                     的购物车页面！</h1>
                 <h3><a href="index.jsp">回到首页</a></h3>
-                <h3><a href="category1.jsp?userid=<%=userid%>">返回产品分类页面</a></h3>
+                <h3><a href="category1.jsp?userid=<%=userid%>">返回产品分类页面，继续购物！</a></h3>
             </div>
             <table style="border: 5px wheat solid">
                 <tr>
@@ -58,10 +58,10 @@
                 </tr>
                 <%
 
-                    //Eureka! 锦囊妙计：给放入购物车的货物设置一个flag，
-                    //flag=0:“放入购物车但是没有购买”的产品
+                    //Eureka! 锦囊妙计：给放入购物车的货物设置一个flag。flag=0是指“放入购物车但是没有购买”的产品。
                     //当下单一次，就让购物车里的产品，flag=1。
-                    //查看订单的时候，检索购物车表单中flag=0的货物
+                    //同时需要给放入购物车的产品加一个字段，就是订单表中最大订单号+1，也就是下一个订单！
+                    //查看订单的时候，检索购物车表单中flag=0且订单号符合的货物
                     String sql = "select * from shopping_cart where user_id=" + userid + " " + "and flag=0 and order_id=" + nextOrderId + " ";
                     System.out.println("showCartSql：" + sql);
                     ResultSet rs = stmt.executeQuery(sql);

@@ -37,14 +37,15 @@
     stmt.execute(sql);
 //添加数据给order_sheet
     PreparedStatement addOrder = connection.prepareStatement(
-            "insert into order_sheet (user_id, order_time, address, order_content, phone) " +
-                    "values (?,?, ?, ?, ?)",
+            "insert into order_sheet (user_id, order_time, address, order_content, phone,select_order_id) " +
+                    "values (?,?, ?, ?, ?,?)",
             Statement.RETURN_GENERATED_KEYS);
     addOrder.setInt(1, userid);
     addOrder.setTimestamp(2, new java.sql.Timestamp(System.currentTimeMillis() + 3600 * 8 * 1000));
     addOrder.setString(3, address);
     addOrder.setString(4, null);
     addOrder.setString(5, phone);
+    addOrder.setString(6, String.valueOf(nextOrderId));
     addOrder.executeUpdate();
     ResultSet rs = addOrder.getGeneratedKeys();
 
@@ -87,6 +88,8 @@
             stmt.execute(sqlGoodsYouBought);
             ResultSet rs2 = stmt.executeQuery(sqlGoodsYouBought);%>
 
+        <h2 align="center">订单详情--货物信息</h2>
+
         <table align="center" style="margin-top:50px ;border: 5px wheat solid">
             <tr>
                 <td>产品id</td>
@@ -119,5 +122,43 @@
         </table>
 
 
+        <%--todo:订单详情需要显示用户姓名、用户地址、用户电话--%>
+        <%
+            String sqlOrderInfo = "select * from order_sheet where user_id=" + userid + " " + "and select_order_id=" + nextOrderId + " " + "LIMIT  1";
+
+            System.out.println(sqlOrderInfo);
+            stmt.execute(sqlOrderInfo);
+            ResultSet rs3 = stmt.executeQuery(sqlOrderInfo);%>
+        <h2 align="center">订单详情--用户信息</h2>
+
+        <table align="center" style="margin-top:50px ;border: 5px wheat solid">
+
+            <tr>
+                <td>用户id</td>
+                <td>下单时间</td>
+                <td>地址</td>
+                <td>手机</td>
+            </tr>
+            <% while (rs3.next()) {%>
+            <tr>
+                <td><%=rs3.getString("user_id") %>
+                </td>
+                <td>
+                    <%--不知道怎么办显示产品的名称--%>
+                    <%--使用联结！！！--%>
+                    <%=rs3.getString("order_time") %>
+                </td>
+                <td>
+                    <%=rs3.getString("address") %>
+                </td>
+                <td><%=rs3.getString("phone") %>
+                </td>
+
+            </tr>
+            <%
+                }
+
+            %>
+        </table>
     </body>
 </html>

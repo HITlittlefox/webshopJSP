@@ -46,7 +46,7 @@
                     </em>
                     的购物车页面！</h1>
                 <h3><a href="index.jsp">回到首页</a></h3>
-                <h3><a href="category1.jsp?userid=<%=userid%>">返回产品分类页面</a></h3>
+                <h3><a href="category1.jsp?userid=<%=userid%>">返回产品分类页面，继续购物！</a></h3>
             </div>
             <table style="border: 5px wheat solid">
                 <tr>
