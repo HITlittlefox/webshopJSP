@@ -1,9 +1,19 @@
 简述：
 
-本webshop由吴佳南(2190300423)担任前端，刘鑫龙(2191210307)担任后端，独立完成。 时间线： 2021.09.30周四上午布置作业，下午完成数据库与流程建模。
+本webshop由吴同学(********)担任前端，刘鑫龙(2191210307)担任后端，独立完成。 时间线： 2021.09.30周四上午布置作业，下午完成数据库与流程建模。
 
 Github地址：https://github.com/HITlittlefox/webshop
+---
+![WebShop示意图](https://pic.imgdb.cn/item/623fb84427f86abb2a44f09d.png)
 
+![数据库结构](https://pic.imgdb.cn/item/623fb86727f86abb2a45bae5.png)
+
+![三级分类与商品页面跳转示意图](https://pic.imgdb.cn/item/623fb88727f86abb2a467c77.png)
+
+![Github代码提交记录](https://pic.imgdb.cn/item/623fb8a327f86abb2a46deed.png)
+
+
+---
 2021.09.30-2021.10.07，完成第一版webshop，大量使用框架内容与依赖。虽然动态较为自然，但是有些臃肿。 2021.10.07-2021.10.08，决定重新整理思路，简化webshop。
 2021.10.08-2021.10.10，完成第二版webshop，实现登录、注册、加入购物车、下订单、查看订单详情等功能，且简化数据表中的逻辑，且统一前端风格，代码中也增添大量注释。
 注：第二版webshop展示图片与第一版webshop展示图片都保存在webapp/glance文件夹中，可方便查看。
